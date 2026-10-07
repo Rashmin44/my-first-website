@@ -1,12 +1,7 @@
-/* [1. GLOBAL SYSTEM SETUP & HACKER BACKGROUND] */
+/* [1. GLOBAL SYSTEM SETUP & LIVE HACKER BACKGROUND LAYER] */
 body {
     font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
     background-color: #000000;
-    /* Neon matrix background scanline layout */
-    background-image: 
-        linear-gradient(rgba(0, 255, 102, 0.03) 50%, rgba(0, 0, 0, 0) 50%),
-        linear-gradient(90deg, rgba(0, 255, 102, 0.03) 50%, rgba(0, 0, 0, 0) 50%);
-    background-size: 5px 5px;
     margin: 0;
     padding: 20px;
     display: flex;
@@ -16,18 +11,33 @@ body {
     color: #f8fafc;
     overflow-x: hidden;
     box-sizing: border-box;
+    position: relative;
 }
 
-/* [2. PREMIUM GRAPHICAL MAIN BOX CONTAINER] */
+/* Background Canvas element setup */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.15; /* Makes background subtle so you can read everything easily */
+}
+
+/* [2. PREMIUM GRAPHICAL GLASSMORPHISM CONTAINER] */
 .resume-container {
-    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     width: 100%;
     max-width: 720px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 
-        0 25px 50px -12px rgba(0, 0, 0, 0.7),
-        0 0 40px rgba(0, 255, 102, 0.1);
+        0 25px 60px -15px rgba(0, 0, 0, 0.9),
+        0 0 50px rgba(0, 255, 102, 0.08),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1);
     padding: 35px;
     box-sizing: border-box;
     position: relative;
@@ -38,20 +48,21 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 10px 18px;
-    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 12px 18px;
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     margin-bottom: 25px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.85rem;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
 }
 
 .status-online {
     color: #00ff66;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-weight: bold;
 }
 
@@ -60,19 +71,20 @@ body {
     height: 8px;
     background-color: #00ff66;
     border-radius: 50%;
-    box-shadow: 0 0 10px #00ff66;
+    box-shadow: 0 0 12px #00ff66;
     animation: pulse 1.5s infinite;
 }
 
 .system-load {
     color: #38bdf8;
+    font-weight: 600;
 }
 
 /* Profile Text Headers */
 h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: 800;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     margin: 0 0 5px 0;
     background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
     -webkit-background-clip: text;
@@ -83,14 +95,14 @@ h1 {
 .subtitle {
     color: #38bdf8;
     font-weight: 600;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     font-size: 0.95rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     text-align: center;
 }
 
-/* [4. PREMIUM NAVIGATION BUTTONS MATRIX] */
+/* [4. 4K ULTRA-GRAPHICAL METALLIC NAVIGATION BUTTONS] */
 .menu-navigation {
     display: flex;
     gap: 14px;
@@ -102,41 +114,46 @@ h1 {
     background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
     color: #94a3b8;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 14px 18px;
+    padding: 16px 20px;
     font-size: 0.9rem;
     font-weight: 700;
-    border-radius: 12px;
+    border-radius: 14px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     flex: 1;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
 }
 
 .nav-btn:hover {
     color: #ffffff;
-    border-color: rgba(56, 189, 248, 0.5);
+    border-color: rgba(56, 189, 248, 0.6);
     background: linear-gradient(135deg, #475569 0%, #334155 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 189, 248, 0.15);
 }
 
 .nav-btn.active {
     color: #ffffff;
     background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
     border-color: #38bdf8;
-    box-shadow: 0 0 20px rgba(3, 105, 161, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 0 25px rgba(3, 105, 161, 0.5), 
+        0 8px 20px rgba(3, 105, 161, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
-/* [5. CONTENT RESUME PAGES CONFIG] */
+/* [5. CONTENT RESUME PAGES & INTRODUCTION PROFILES] */
 .resume-page {
     display: none;
     text-align: left;
-    padding: 20px;
-    background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 14px;
+    padding: 24px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
     animation: ultraReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -148,9 +165,45 @@ h2 {
     font-size: 1.3rem;
     color: #ffffff;
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 8px;
+    font-family: 'Fira Code', monospace;
+}
+
+/* Introduction Box Layout Component */
+.profile-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 4px solid #00ff66;
+    padding: 18px;
+    border-radius: 4px 14px 14px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-meta {
+    font-size: 1rem;
+    color: #cbd5e1;
+    line-height: 1.4;
+}
+
+.profile-meta strong {
+    color: #ffffff;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    margin-right: 6px;
+}
+
+.terminal-link {
+    color: #38bdf8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.terminal-link:hover {
+    color: #00ff66;
+    text-decoration: underline;
 }
 
 p {
@@ -160,17 +213,17 @@ p {
 }
 
 .item {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.25);
     border-left: 3px solid #38bdf8;
-    padding: 15px;
-    border-radius: 0 10px 10px 0;
+    padding: 16px;
+    border-radius: 0 12px 12px 0;
     margin-bottom: 15px;
 }
 
 .item-title {
     font-weight: 700;
     color: #f1f5f9;
-    font-size: 1rem;
+    font-size: 1.05rem;
 }
 
 .item-detail {
@@ -194,21 +247,22 @@ li {
 .gadget-terminal {
     margin-top: 30px;
     background: #050505;
-    border: 1px solid #00ff66;
-    border-radius: 10px;
-    font-family: 'Courier New', Courier, monospace;
-    padding: 15px;
-    box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.1);
+    border: 1px solid rgba(0, 255, 102, 0.5);
+    border-radius: 12px;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    padding: 16px;
+    box-shadow: inset 0 0 15px rgba(0, 255, 102, 0.05);
 }
 
 .terminal-header {
     display: flex;
     gap: 6px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 255, 102, 0.2);
-    padding-bottom: 6px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 255, 102, 0.15);
+    padding-bottom: 8px;
     font-size: 0.75rem;
     color: #00ff66;
+    letter-spacing: 0.05em;
 }
 
 .terminal-dot {
@@ -221,7 +275,7 @@ li {
 .terminal-body {
     font-size: 0.85rem;
     color: #00ff66;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .cursor {
@@ -234,7 +288,7 @@ li {
     margin-left: 4px;
 }
 
-/* [7. CORE DESIGN ANIMATIONS] */
+/* [7. CORE KEYFRAME ENGINE SETUP] */
 @keyframes pulse {
     0% { transform: scale(1); opacity: 0.6; }
     50% { transform: scale(1.2); opacity: 1; }
@@ -247,6 +301,6 @@ li {
 }
 
 @keyframes ultraReveal {
-    from { opacity: 0; transform: translateY(12px); filter: blur(2px); }
+    from { opacity: 0; transform: translateY(15px); filter: blur(4px); }
     to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }

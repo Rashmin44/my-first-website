@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rashmin // Tech Portfolio Console</title>
     <!-- Import modern Google Fonts -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://googleapis.com" rel="stylesheet">
     <!-- Link our CSS style sheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Dynamic Live Matrix Code Rain Canvas Object Background -->
+    <canvas id="matrix-canvas"></canvas>
 
     <div class="resume-container">
         
@@ -23,26 +26,26 @@
             <div class="system-load" id="live-time">SYS_TIME: 00:00:00</div>
         </div>
 
-        
         <h1>RASHMIN</h1>
         <p class="subtitle">Systems & Interface Engineer</p>
 
-        <!-- Dynamic Graphical Navigation Matrix -->
+        <!-- Dynamic Ultra-Graphical Navigation Matrix -->
         <div class="menu-navigation">
-            <button class="nav-btn active" onclick="openPage(event, 'hobbies', 'hobbies.sh')">⚡ Hobbies</button>
+            <button class="nav-btn active" onclick="openPage(event, 'intro', 'introduction.sh')">⚡ Introduction</button>
             <button class="nav-btn" onclick="openPage(event, 'education', 'education.cfg')">🎓 Education</button>
             <button class="nav-btn" onclick="openPage(event, 'jobs', 'target_jobs.exe')">🎯 Targeted Jobs</button>
         </div>
 
-        <!-- Sheet Page 1: Hobbies (Visible by Default) -->
-        <div id="hobbies" class="resume-page active-page">
-            <h2>Hobbies & Tech Explorations</h2>
-            <p>Interests centered around problem-solving, building architectures, and discovering modern technologies:</p>
-            <ul>
-                <li><strong>Hardware Tinkering:</strong> Testing mechanical arrays, microcontrollers, and automation devices.</li>
-                <li><strong>Open Source Contribution:</strong> Writing system scripts and structural styles for community deployment.</li>
-                <li><strong>Tech Architecture:</strong> Studying cloud security standards, layout design, and core databases.</li>
-            </ul>
+        <!-- Sheet Page 1: Introduction (Visible by Default) -->
+        <div id="intro" class="resume-page active-page">
+            <h2>Identity Core // data_fetch</h2>
+            <div class="profile-card">
+                <div class="profile-meta"><strong>Full Name:</strong> Patel Rashmin Pravinbhai</div>
+                <div class="profile-meta"><strong>Address:</strong> Mansa, Gandhinagar, Gujarat, India</div>
+                <div class="profile-meta"><strong>Email Secure:</strong> <a href="mailto:prashmin55@gmail.com" class="terminal-link">prashmin55@gmail.com</a></div>
+                <div class="profile-meta"><strong>Comms Line:</strong> <a href="tel:9898120927" class="terminal-link">+91 9898120927</a></div>
+            </div>
+            <p style="margin-top: 15px;">System identity confirmed. Ready to execute terminal queries and interface deployment sequences across modern web networks.</p>
         </div>
 
         <!-- Sheet Page 2: Education -->
@@ -84,7 +87,7 @@
             <div class="terminal-body" id="log-output">
                 &gt; initialising system console... done.<br>
                 &gt; loaded profile asset: rashmin<br>
-                &gt; current file view: hobbies.sh<span class="cursor"></span>
+                &gt; current file view: introduction.sh<span class="cursor"></span>
             </div>
         </div>
 
