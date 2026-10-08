@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rashmin // Tech Portfolio Console</title>
     <!-- Import modern Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com" rel="stylesheet">
     <!-- Link our CSS style sheet -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* This ensures the link fills out exactly like your old button theme */
+        .menu-navigation a { text-decoration: none; text-align: center; }
+    </style>
 </head>
 <body>
 
@@ -31,12 +35,12 @@
 
         <!-- Dynamic Ultra-Graphical Navigation Matrix -->
         <div class="menu-navigation">
-            <button class="nav-btn active" onclick="openPage(event, 'intro', 'introduction.sh')">⚡ Introduction</button>
-            <button class="nav-btn" onclick="openPage(event, 'education', 'education.cfg')">🎓 Education</button>
-            <button class="nav-btn" onclick="openPage(event, 'jobs', 'target_jobs.exe')">🎯 Targeted Jobs</button>
+            <a href="index.html" class="nav-btn active">⚡ Introduction</a>
+            <a href="education.html" class="nav-btn">🎓 Education</a>
+            <a href="jobs.html" class="nav-btn">🎯 Targeted Jobs</a>
         </div>
 
-        <!-- Sheet Page 1: Introduction (Visible by Default) -->
+        <!-- Sheet Page 1: Introduction -->
         <div id="intro" class="resume-page active-page">
             <h2>Identity Core // data_fetch</h2>
             <div class="profile-card">
@@ -46,37 +50,6 @@
                 <div class="profile-meta"><strong>Comms Line:</strong> <a href="tel:9898120927" class="terminal-link">+91 9898120927</a></div>
             </div>
             <p style="margin-top: 15px;">System identity confirmed. Ready to execute terminal queries and interface deployment sequences across modern web networks.</p>
-        </div>
-
-        <!-- Sheet Page 2: Education -->
-        <div id="education" class="resume-page">
-            <h2>Academic Records</h2>
-            <div class="item">
-                <div class="item-title">Degree / Specialization in Technology</div>
-                <div class="item-detail">Academic Institute | Graduation Archive</div>
-                <p>Focused on computing logics, structural UI system mechanics, data pipeline rendering, and hardware architecture parameters.</p>
-            </div>
-            <div class="item">
-                <div class="item-title">Engineering Core Badges</div>
-                <ul>
-                    <li>Advanced Frontend Infrastructure & Layout Mastery</li>
-                    <li>Full-Stack Software Architecture Validation</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Sheet Page 3: Targeted Jobs -->
-        <div id="jobs" class="resume-page">
-            <h2>Target Deployment Operations</h2>
-            <p>Active protocols seeking opportunities within development environments:</p>
-            <div class="item">
-                <div class="item-title">1. UI Systems Architect</div>
-                <div class="item-detail">Target Focus: Modern Layout Engines, Micro-frontend Pipelines, Smooth Interface States</div>
-            </div>
-            <div class="item">
-                <div class="item-title">2. Core Technical Software Engineer</div>
-                <div class="item-detail">Target Focus: Clean Code Architecture, Systems Scripting, Database Infrastructure</div>
-            </div>
         </div>
 
         <!-- TECH GADGET #2: Live Shell Logs Terminal Window -->

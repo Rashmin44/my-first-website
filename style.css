@@ -1,20 +1,21 @@
-/* [1. GLOBAL SYSTEM SETUP & LIVE HACKER BACKGROUND LAYER] */
+/* ==========================================================================
+   1. GLOBAL SYSTEM ARCHITECTURE & MASTER EFFECTS
+   ========================================================================== */
 body {
-    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background-color: #000000;
     margin: 0;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: #f8fafc;
     overflow-x: hidden;
     box-sizing: border-box;
     position: relative;
+    font-family: 'Share Tech Mono', 'Fira Code', monospace;
+    transition: background-color 0.8s ease;
 }
 
-/* Background Canvas element setup */
+/* Master full-screen 4K background particle canvas layer */
 #matrix-canvas {
     position: fixed;
     top: 0;
@@ -22,285 +23,302 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.15; /* Makes background subtle so you can read everything easily */
 }
 
-/* [2. PREMIUM GRAPHICAL GLASSMORPHISM CONTAINER] */
-.resume-container {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+/* Cyber CRT Scanline Terminal Overlay Effect Layer */
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 720px;
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 
-        0 25px 60px -15px rgba(0, 0, 0, 0.9),
-        0 0 50px rgba(0, 255, 102, 0.08),
-        inset 0 1px 2px rgba(255, 255, 255, 0.1);
-    padding: 35px;
-    box-sizing: border-box;
-    position: relative;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 999;
+    background-size: 100% 3px, 6px 100%;
+    pointer-events: none;
 }
 
-/* [3. TECH BAR GADGET STYLES] */
-.status-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 12px 18px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    margin-bottom: 25px;
-    font-family: 'Fira Code', 'Courier New', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 0.05em;
-}
-
-.status-online {
-    color: #00ff66;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: bold;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #00ff66;
-    border-radius: 50%;
-    box-shadow: 0 0 12px #00ff66;
-    animation: pulse 1.5s infinite;
-}
-
-.system-load {
-    color: #38bdf8;
-    font-weight: 600;
-}
-
-/* Profile Text Headers */
-h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    margin: 0 0 5px 0;
-    background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-align: center;
-}
-
-.subtitle {
-    color: #38bdf8;
-    font-weight: 600;
-    margin-bottom: 35px;
-    font-size: 0.95rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-/* [4. 4K ULTRA-GRAPHICAL METALLIC NAVIGATION BUTTONS] */
-.menu-navigation {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
-.nav-btn {
-    background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
-    color: #94a3b8;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 16px 20px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    flex: 1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    position: relative;
-    overflow: hidden;
-}
-
-.nav-btn:hover {
-    color: #ffffff;
-    border-color: rgba(56, 189, 248, 0.6);
-    background: linear-gradient(135deg, #475569 0%, #334155 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 189, 248, 0.15);
-}
-
-.nav-btn.active {
-    color: #ffffff;
-    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-    border-color: #38bdf8;
-    box-shadow: 
-        0 0 25px rgba(3, 105, 161, 0.5), 
-        0 8px 20px rgba(3, 105, 161, 0.3),
-        inset 0 1px 1px rgba(255, 255, 255, 0.3);
-}
-
-/* [5. CONTENT RESUME PAGES & INTRODUCTION PROFILES] */
-.resume-page {
-    display: none;
-    text-align: left;
-    padding: 24px;
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 16px;
-    animation: ultraReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.resume-page.active-page {
-    display: block;
-}
-
-h2 {
-    font-size: 1.3rem;
-    color: #ffffff;
-    margin-top: 0;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 8px;
-    font-family: 'Fira Code', monospace;
-}
-
-/* Introduction Box Layout Component */
-.profile-card {
-    background: rgba(0, 0, 0, 0.3);
-    border-left: 4px solid #00ff66;
-    padding: 18px;
-    border-radius: 4px 14px 14px 4px;
+/* Main Display Framing Box Workspace Alignment */
+.hacker-workspace {
+    width: 100%;
+    max-width: 780px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
+    position: relative;
+    z-index: 10;
 }
 
-.profile-meta {
-    font-size: 1rem;
-    color: #cbd5e1;
-    line-height: 1.4;
+.central-mainframe-box {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 40px;
+    box-sizing: border-box;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.profile-meta strong {
-    color: #ffffff;
-    font-family: 'Fira Code', monospace;
-    font-size: 0.9rem;
-    margin-right: 6px;
-}
+/* ==========================================================================
+   2. TRIPLE THEME SCHEMES (PAGE SPECIFIC OVERRIDES)
+   ========================================================================== */
 
-.terminal-link {
-    color: #38bdf8;
-    text-decoration: none;
-    transition: color 0.2s ease;
+/* 🟢 PAGE 1 THEME: GRAPHICAL GREEN HACKER MAIN CONSOLE (index.html) */
+.boot-screen-body {
+    background-color: #030704;
 }
-
-.terminal-link:hover {
+.boot-screen-body .central-mainframe-box {
+    background: linear-gradient(135deg, rgba(6, 22, 12, 0.8) 0%, rgba(2, 8, 4, 0.95) 100%);
+    border: 1px solid rgba(0, 255, 102, 0.2);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 255, 102, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.05);
+}
+.glitch-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-align: center;
+    margin: 0;
     color: #00ff66;
-    text-decoration: underline;
+    text-shadow: 0 0 20px rgba(0, 255, 102, 0.6);
+}
+.scan-bar-line {
+    height: 2px;
+    background: #00ff66;
+    box-shadow: 0 0 10px #00ff66;
+    margin-top: 10px;
+    position: relative;
+    animation: trackLine 4s linear infinite;
+}
+.welcome-flash {
+    color: #ffffff;
+    font-size: 1.4rem;
+    text-align: center;
+    letter-spacing: 0.1em;
+    animation: blinker 1.5s infinite;
 }
 
-p {
-    color: #cbd5e1;
-    line-height: 1.6;
-    font-size: 0.95rem;
+/* 🔵 PAGE 2 THEME: FUTURISTIC CYBER-LAB DATA ARCHIVE (education.html) */
+.education-screen-body {
+    background-color: #02080f;
 }
-
-.item {
-    background: rgba(0, 0, 0, 0.25);
-    border-left: 3px solid #38bdf8;
-    padding: 16px;
-    border-radius: 0 12px 12px 0;
-    margin-bottom: 15px;
+.education-screen-body .central-mainframe-box {
+    background: linear-gradient(135deg, rgba(6, 26, 44, 0.85) 0%, rgba(2, 10, 18, 0.98) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(56, 189, 248, 0.08);
 }
-
-.item-title {
-    font-weight: 700;
-    color: #f1f5f9;
-    font-size: 1.05rem;
-}
-
-.item-detail {
+.edu-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.8rem;
     color: #38bdf8;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 8px;
+    text-align: center;
+    margin: 0;
+    text-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+    letter-spacing: 0.05em;
 }
+.cyan-glow { border-color: #38bdf8 !important; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+.cyan-bar { background: #38bdf8; box-shadow: 0 0 10px #38bdf8; }
 
-ul {
-    padding-left: 20px;
+/* 🟠 PAGE 3 THEME: INDUSTRIAL TACTICAL COMMAND DASHBOARD (jobs.html) */
+.jobs-screen-body {
+    background-color: #0b0602;
+}
+.jobs-screen-body .central-mainframe-box {
+    background: linear-gradient(135deg, rgba(38, 20, 8, 0.8) 0%, rgba(12, 6, 2, 0.97) 100%);
+    border: 1px solid rgba(249, 115, 22, 0.25);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(249, 115, 22, 0.08);
+}
+.jobs-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.8rem;
+    color: #f97316;
+    text-align: center;
+    margin: 0;
+    text-shadow: 0 0 25px rgba(249, 115, 22, 0.5);
+    letter-spacing: 0.05em;
+}
+.orange-glow { border-color: #f97316 !important; box-shadow: 0 0 15px rgba(249, 115, 22, 0.4); }
+.orange-bar { background: #f97316; box-shadow: 0 0 10px #f97316; }
+
+/* ==========================================================================
+   3. UNIVERSAL GADGET SYSTEM COMPONENT STYLES
+   ========================================================================== */
+.top-gadget-ticker {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    display: flex;
+    gap: 10px;
+    border: 1px solid rgba(0, 255, 102, 0.1);
+    color: #00ff66;
+}
+.edu-ticker { color: #38bdf8; border-color: rgba(56, 189, 248, 0.1); }
+.jobs-ticker { color: #f97316; border-color: rgba(249, 115, 22, 0.1); }
+.ticker-label { font-weight: 700; opacity: 0.8; }
+
+.corner-accent {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-style: solid;
+    border-width: 0;
+    border-color: #00ff66;
+}
+.top-left { top: -2px; left: -2px; border-top-width: 3px; border-left-width: 3px; }
+.top-right { top: -2px; right: -2px; border-top-width: 3px; border-right-width: 3px; }
+.bottom-left { bottom: -2px; left: -2px; border-bottom-width: 3px; border-left-width: 3px; }
+.bottom-right { bottom: -2px; right: -2px; border-bottom-width: 3px; border-right-width: 3px; }
+
+.identity-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.console-tag {
+    font-size: 0.75rem;
     color: #cbd5e1;
+    opacity: 0.4;
+    letter-spacing: 0.2em;
     margin: 0;
 }
 
-li {
-    margin-bottom: 8px;
-}
-
-/* [6. TECH TERMINAL GADGET DISPLAY] */
-.gadget-terminal {
-    margin-top: 30px;
-    background: #050505;
-    border: 1px solid rgba(0, 255, 102, 0.5);
+.welcome-terminal-core {
+    min-height: 240px;
+    background: rgba(0, 0, 0, 0.35);
     border-radius: 12px;
-    font-family: 'Fira Code', 'Courier New', monospace;
-    padding: 16px;
-    box-shadow: inset 0 0 15px rgba(0, 255, 102, 0.05);
+    padding: 24px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.terminal-header {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid rgba(0, 255, 102, 0.15);
-    padding-bottom: 8px;
-    font-size: 0.75rem;
-    color: #00ff66;
-    letter-spacing: 0.05em;
+.hacker-intro-text, .mission-directive-text {
+    color: #94a3b8;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    text-align: center;
 }
 
-.terminal-dot {
-    width: 6px;
-    height: 6px;
-    background: #00ff66;
-    border-radius: 50%;
+.spec-matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
 }
-
-.terminal-body {
+.spec-node {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 102, 0.15);
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
     font-size: 0.85rem;
+    color: #ffffff;
+}
+.spec-node span {
     color: #00ff66;
-    line-height: 1.5;
+    display: block;
+    font-size: 0.7rem;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+.profile-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 255, 102, 0.15);
+    border-left: 4px solid #00ff66;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+}
+.profile-meta {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+.profile-meta strong {
+    color: #00ff66;
+    margin-right: 8px;
+}
+.terminal-link {
+    color: #38bdf8;
+    text-decoration: none;
+}
+.terminal-link:hover {
+    text-decoration: underline;
 }
 
-.cursor {
-    display: inline-block;
-    width: 8px;
-    height: 15px;
-    background: #00ff66;
-    animation: blink 0.8s infinite;
-    vertical-align: middle;
-    margin-left: 4px;
+/* ==========================================================================
+   4. 4K METALLIC NAVIGATION BUTTON MATRIX STYLE
+   ========================================================================== */
+.menu-navigation {
+    display: flex;
+    gap: 15px;
+}
+.menu-navigation a {
+    text-decoration: none;
+    text-align: center;
+}
+.nav-link {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+.nav-link .nav-icon { font-size: 1.2rem; }
+.nav-link .nav-text { font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 0.05em; }
+
+.nav-link:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+    border-color: rgba(255,255,255,0.2);
 }
 
-/* [7. CORE KEYFRAME ENGINE SETUP] */
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 0.6; }
-    50% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.6; }
-}
+.boot-screen-body .nav-link.active { border-color: #00ff66; background: rgba(0, 255, 102, 0.08); box-shadow: 0 0 20px rgba(0, 255, 102, 0.15); }
+.boot-screen-body .nav-link.active .nav-text { color: #00ff66; }
 
-@keyframes blink {
-    0%, 49% { background: #00ff66; }
-    50%, 100% { background: transparent; }
-}
+.education-screen-body .nav-link.active { border-color: #38bdf8; background: rgba(56, 189, 248, 0.08); box-shadow: 0 0 20px rgba(56, 189, 248, 0.15); }
+.education-screen-body .nav-link.active .nav-text { color: #38bdf8; }
 
-@keyframes ultraReveal {
-    from { opacity: 0; transform: translateY(15px); filter: blur(4px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+.jobs-screen-body .nav-link.active { border-color: #f97316; background: rgba(249, 115, 22, 0.08); box-shadow: 0 0 20px rgba(249, 115, 22, 0.15); }
+.jobs-screen-body .nav-link.active .nav-text { color: #f97316; }
+
+/* ==========================================================================
+   5. SPECIAL EDUCATION LAB GRAPHICS SYSTEM COMPONENTS
+   ========================================================================== */
+.edu-main-card {
+    border-left: 4px solid #38bdf8;
+    background: rgba(56, 189, 248, 0.03);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 20px;
+    text-align: left;
 }
+.edu-card-header { display: flex; justify-content: space-between; align-items: center; }
+.edu-main-card h3 { margin: 0; font-size: 1.15rem; color: #ffffff; }
+.edu-date-badge { font-size: 0.8rem; background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 4px 8px; border-radius: 4px; font-weight: 700; }
+.university-name { margin: 6px 0 0 0; color: #94a3b8; font-size: 0.95rem; }
+
+.telemetry-table-wrapper { text-align: left; }
+.telemetry-table-wrapper h4 { margin: 0 0 12px 0; font-size: 0.8rem; color: #64748b; letter-spacing: 0.1em; }
+.sgpa-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.sgpa-node {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(56, 189, 248, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+    display: flex;

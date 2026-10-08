@@ -1,26 +1,28 @@
 /**
- * Page Interface Switching Core Engine
+ * ⚡ Live Page Terminal Log Initialization Engine
  */
-function openPage(event, pageId, filename) {
-    const pages = document.getElementsByClassName("resume-page");
-    for (let i = 0; i < pages.length; i++) {
-        pages[i].classList.remove("active-page");
-    }
-
-    const buttons = document.getElementsByClassName("nav-btn");
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove("active");
-    }
-
-    document.getElementById(pageId).classList.add("active-page");
-    event.currentTarget.classList.add("active");
-
+document.addEventListener("DOMContentLoaded", () => {
     const logBox = document.getElementById("log-output");
-    logBox.innerHTML = `&gt; request system branch fetch... verified.<br>&gt; opening storage block: [${filename}]<br>&gt; rendering graphical data pipeline... successful.<span class="cursor"></span>`;
-}
+    if (logBox) {
+        // Reads the current file path to determine which file you are viewing
+        const currentPath = window.location.pathname.split("/").pop();
+        let currentFile = "introduction.sh"; // Backup fallback text
+
+        if (currentPath === "education.html") {
+            currentFile = "education.cfg";
+        } else if (currentPath === "jobs.html") {
+            currentFile = "target_jobs.exe";
+        }
+
+        // Prints your automated server console boot text logs
+        logBox.innerHTML = `&gt; initialising system console... done.<br>
+&gt; loaded profile asset: rashmin<br>
+&gt; current file view: ${currentFile}<span class="cursor"></span>`;
+    }
+});
 
 /**
- * Live Synchronized System Clock Engine
+ * ⏰ Live Synchronized System Clock Engine
  */
 function updateClock() {
     const now = new Date();
@@ -37,44 +39,53 @@ setInterval(updateClock, 1000);
 updateClock();
 
 /**
- * Live Hacker Matrix Rain Animation Engine
+ * 🟢 4K Multi-Theme Flowing Matrix Rain Animation Engine
  */
 const canvas = document.getElementById('matrix-canvas');
-const ctx = canvas.getContext('2d');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-const katakana = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const alphabet = katakana.split('');
-
-const fontSize = 16;
-let columns = canvas.width / fontSize;
-
-const rainDrops = [];
-for (let x = 0; x < columns; x++) {
-    rainDrops[x] = 1;
-}
-
-function drawMatrix() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = '#00ff66';
-    ctx.font = fontSize + 'px monospace';
-
-    for (let i = 0; i < rainDrops.length; i++) {
-        const text = alphabet[Math.floor(Math.random() * alphabet.length)];
-        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-
-        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            rainDrops[i] = 0;
-        }
-        rainDrops[i]++;
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Dynamically re-colors the falling stream depending on the active body class theme
+    let renderColor = '#00ff66'; // Default main page console green
+    if (document.body.classList.contains('education-screen-body')) {
+        renderColor = '#38bdf8'; // Lab data archive cyan
+    } else if (document.body.classList.contains('jobs-screen-body')) {
+        renderColor = '#f97316'; // Tactical operations orange
+    }
+
+    // High-tech terminal grid matrix symbols
+    const matrixSymbols = '0123456789XÆØΩΨΞ∇ΔΘΦ█▓▒░𝄔⚡📊💻🛠️🎯'.split('');
+    const fontSize = 16;
+    let columns = canvas.width / fontSize;
+
+    const rainDrops = [];
+    for (let x = 0; x < columns; x++) {
+        rainDrops[x] = Math.random() * -100; // Staggers drops so they stream naturally
+    }
+
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = renderColor;
+        ctx.font = '700 ' + fontSize + 'px monospace';
+
+        for (let i = 0; i < rainDrops.length; i++) {
+            const text = matrixSymbols[Math.floor(Math.random() * matrixSymbols.length)];
+            ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+            if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.985) {
+                rainDrops[i] = 0;
+            }
+            rainDrops[i]++;
+        }
+    }
+    setInterval(drawMatrix, 33);
 }
-setInterval(drawMatrix, 30);
