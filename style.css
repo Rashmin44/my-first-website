@@ -1,324 +1,417 @@
 /* ==========================================================================
-   1. GLOBAL SYSTEM ARCHITECTURE & MASTER EFFECTS
+   1. MASTER ARCHITECTURE & CONSTANTS
    ========================================================================== */
+:root {
+    --bg-dark: #0a0e14;
+    --card-bg: rgba(16, 22, 32, 0.65);
+    --border-color: rgba(255, 255, 255, 0.05);
+    --border-glow: rgba(0, 255, 157, 0.15);
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --accent-emerald: #00ff9d;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+}
+
 body {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     overflow-x: hidden;
-    box-sizing: border-box;
     position: relative;
-    font-family: 'Share Tech Mono', 'Fira Code', monospace;
-    transition: background-color 0.8s ease;
 }
 
-/* Master full-screen 4K background particle canvas layer */
 #matrix-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
-}
-
-/* Cyber CRT Scanline Terminal Overlay Effect Layer */
-.crt-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    z-index: 999;
-    background-size: 100% 3px, 6px 100%;
+    z-index: 1;
     pointer-events: none;
+    opacity: 0.25; /* Kept very light and subtle so it doesn't look cheap */
 }
 
-/* Main Display Framing Box Workspace Alignment */
-.hacker-workspace {
+.main-frame-container {
+    position: relative;
+    z-index: 2;
     width: 100%;
-    max-width: 780px;
+    max-width: 680px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   2. GATEWAY CONSOLE GRAPHICS (INDEX PAGE)
+   ========================================================================== */
+.welcome-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 48px;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.terminal-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-emerald);
+    background: rgba(0, 255, 157, 0.08);
+    padding: 6px 12px;
+    border-radius: 30px;
+    display: inline-block;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+}
+
+.brand-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    margin: 0 0 12px 0;
+    text-indent: 0.2em; /* Offsets letter-spacing balance */
+}
+
+.brand-tagline {
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0 0 16px 0;
+}
+
+.brand-subtext {
+    color: #6b7280;
+    font-size: 0.9rem;
+    max-width: 400px;
+    margin: 0 auto 36px auto;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   3. PROFESSIONAL STRUCTURED CONTENT COMPONENT CARDS (PAGES 1-3)
+   ========================================================================== */
+.content-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 40px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    margin-bottom: 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 20px;
+}
+
+.section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-emerald);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.card-header h2 {
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+/* Page 1 Specific Row Metrics */
+.identity-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    padding-bottom: 12px;
+}
+
+.meta-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #4b5563;
+}
+
+.meta-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.link-premium {
+    color: var(--text-primary);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: border-color 0.2s;
+}
+
+.link-premium:hover {
+    border-color: var(--accent-emerald);
+}
+
+.narrative-box, .mission-statement {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+}
+
+/* Page 2 Educational Structures */
+.degree-showcase h3 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin: 0 0 6px 0;
+}
+
+.institution-line {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.metric-node {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    padding: 14px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.metric-node .lbl {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: #4b5563;
+    margin-bottom: 4px;
+}
+
+.metric-node .val {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.award-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 255, 157, 0.03);
+    border: 1px dashed rgba(0, 255, 157, 0.2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+}
+
+.award-lbl {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.award-val {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--accent-emerald);
+}
+
+.credentials-vault {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.credential-item {
+    display: flex;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.cred-icon {
+    font-size: 1.25rem;
+}
+
+.cred-details h4 {
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.cred-details p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Page 3 Target Operations Stack */
+.jobs-stack {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    position: relative;
-    z-index: 10;
+    margin-bottom: 32px;
 }
 
-.central-mainframe-box {
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-radius: 16px;
-    padding: 40px;
-    box-sizing: border-box;
-    position: relative;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+.job-block {
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    padding-left: 20px;
 }
 
-/* ==========================================================================
-   2. TRIPLE THEME SCHEMES (PAGE SPECIFIC OVERRIDES)
-   ========================================================================== */
-
-/* 🟢 PAGE 1 THEME: GRAPHICAL GREEN HACKER MAIN CONSOLE (index.html) */
-.boot-screen-body {
-    background-color: #030704;
-}
-.boot-screen-body .central-mainframe-box {
-    background: linear-gradient(135deg, rgba(6, 22, 12, 0.8) 0%, rgba(2, 8, 4, 0.95) 100%);
-    border: 1px solid rgba(0, 255, 102, 0.2);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 255, 102, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.05);
-}
-.glitch-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 4rem;
-    font-weight: 900;
-    letter-spacing: 0.15em;
-    text-align: center;
-    margin: 0;
-    color: #00ff66;
-    text-shadow: 0 0 20px rgba(0, 255, 102, 0.6);
-}
-.scan-bar-line {
-    height: 2px;
-    background: #00ff66;
-    box-shadow: 0 0 10px #00ff66;
-    margin-top: 10px;
-    position: relative;
-    animation: trackLine 4s linear infinite;
-}
-.welcome-flash {
-    color: #ffffff;
-    font-size: 1.4rem;
-    text-align: center;
-    letter-spacing: 0.1em;
-    animation: blinker 1.5s infinite;
-}
-
-/* 🔵 PAGE 2 THEME: FUTURISTIC CYBER-LAB DATA ARCHIVE (education.html) */
-.education-screen-body {
-    background-color: #02080f;
-}
-.education-screen-body .central-mainframe-box {
-    background: linear-gradient(135deg, rgba(6, 26, 44, 0.85) 0%, rgba(2, 10, 18, 0.98) 100%);
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(56, 189, 248, 0.08);
-}
-.edu-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.8rem;
-    color: #38bdf8;
-    text-align: center;
-    margin: 0;
-    text-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
-    letter-spacing: 0.05em;
-}
-.cyan-glow { border-color: #38bdf8 !important; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
-.cyan-bar { background: #38bdf8; box-shadow: 0 0 10px #38bdf8; }
-
-/* 🟠 PAGE 3 THEME: INDUSTRIAL TACTICAL COMMAND DASHBOARD (jobs.html) */
-.jobs-screen-body {
-    background-color: #0b0602;
-}
-.jobs-screen-body .central-mainframe-box {
-    background: linear-gradient(135deg, rgba(38, 20, 8, 0.8) 0%, rgba(12, 6, 2, 0.97) 100%);
-    border: 1px solid rgba(249, 115, 22, 0.25);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(249, 115, 22, 0.08);
-}
-.jobs-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.8rem;
-    color: #f97316;
-    text-align: center;
-    margin: 0;
-    text-shadow: 0 0 25px rgba(249, 115, 22, 0.5);
-    letter-spacing: 0.05em;
-}
-.orange-glow { border-color: #f97316 !important; box-shadow: 0 0 15px rgba(249, 115, 22, 0.4); }
-.orange-bar { background: #f97316; box-shadow: 0 0 10px #f97316; }
-
-/* ==========================================================================
-   3. UNIVERSAL GADGET SYSTEM COMPONENT STYLES
-   ========================================================================== */
-.top-gadget-ticker {
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-size: 0.85rem;
+.job-meta-head {
     display: flex;
-    gap: 10px;
-    border: 1px solid rgba(0, 255, 102, 0.1);
-    color: #00ff66;
-}
-.edu-ticker { color: #38bdf8; border-color: rgba(56, 189, 248, 0.1); }
-.jobs-ticker { color: #f97316; border-color: rgba(249, 115, 22, 0.1); }
-.ticker-label { font-weight: 700; opacity: 0.8; }
-
-.corner-accent {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-style: solid;
-    border-width: 0;
-    border-color: #00ff66;
-}
-.top-left { top: -2px; left: -2px; border-top-width: 3px; border-left-width: 3px; }
-.top-right { top: -2px; right: -2px; border-top-width: 3px; border-right-width: 3px; }
-.bottom-left { bottom: -2px; left: -2px; border-bottom-width: 3px; border-left-width: 3px; }
-.bottom-right { bottom: -2px; right: -2px; border-bottom-width: 3px; border-right-width: 3px; }
-
-.identity-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-.console-tag {
-    font-size: 0.75rem;
-    color: #cbd5e1;
-    opacity: 0.4;
-    letter-spacing: 0.2em;
-    margin: 0;
-}
-
-.welcome-terminal-core {
-    min-height: 240px;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.hacker-intro-text, .mission-directive-text {
-    color: #94a3b8;
-    line-height: 1.7;
-    font-size: 0.95rem;
-    text-align: center;
-}
-
-.spec-matrix-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin: 20px 0;
-}
-.spec-node {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(0, 255, 102, 0.15);
-    padding: 10px;
-    border-radius: 6px;
-    text-align: center;
-    font-size: 0.85rem;
-    color: #ffffff;
-}
-.spec-node span {
-    color: #00ff66;
-    display: block;
-    font-size: 0.7rem;
-    margin-bottom: 2px;
-    text-transform: uppercase;
-}
-.profile-card {
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(0, 255, 102, 0.15);
-    border-left: 4px solid #00ff66;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    text-align: left;
-}
-.profile-meta {
-    font-size: 0.95rem;
-    color: #e2e8f0;
-}
-.profile-meta strong {
-    color: #00ff66;
-    margin-right: 8px;
-}
-.terminal-link {
-    color: #38bdf8;
-    text-decoration: none;
-}
-.terminal-link:hover {
-    text-decoration: underline;
-}
-
-/* ==========================================================================
-   4. 4K METALLIC NAVIGATION BUTTON MATRIX STYLE
-   ========================================================================== */
-.menu-navigation {
-    display: flex;
-    gap: 15px;
-}
-.menu-navigation a {
-    text-decoration: none;
-    text-align: center;
-}
-.nav-link {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.job-meta-head h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.status-indicator {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--accent-emerald);
+    border: 1px solid rgba(0, 255, 157, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.job-block p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.capability-telemetry {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 36px;
+}
+
+.telemetry-row {
+    display: flex;
+    flex-direction: column;
     gap: 6px;
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 14px;
-    border-radius: 12px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
-.nav-link .nav-icon { font-size: 1.2rem; }
-.nav-link .nav-text { font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 0.05em; }
-
-.nav-link:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.5);
-    border-color: rgba(255,255,255,0.2);
 }
 
-.boot-screen-body .nav-link.active { border-color: #00ff66; background: rgba(0, 255, 102, 0.08); box-shadow: 0 0 20px rgba(0, 255, 102, 0.15); }
-.boot-screen-body .nav-link.active .nav-text { color: #00ff66; }
+.tel-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+}
 
-.education-screen-body .nav-link.active { border-color: #38bdf8; background: rgba(56, 189, 248, 0.08); box-shadow: 0 0 20px rgba(56, 189, 248, 0.15); }
-.education-screen-body .nav-link.active .nav-text { color: #38bdf8; }
+.tel-track {
+    background: rgba(255, 255, 255, 0.05);
+    height: 4px;
+    border-radius: 20px;
+    width: 100%;
+}
 
-.jobs-screen-body .nav-link.active { border-color: #f97316; background: rgba(249, 115, 22, 0.08); box-shadow: 0 0 20px rgba(249, 115, 22, 0.15); }
-.jobs-screen-body .nav-link.active .nav-text { color: #f97316; }
+.tel-fill {
+    background: var(--accent-emerald);
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 8px rgba(0, 255, 157, 0.5);
+}
 
 /* ==========================================================================
-   5. SPECIAL EDUCATION LAB GRAPHICS SYSTEM COMPONENTS
+   4. PREMIUM BUTTON MOTIFS & FLOW NAVIGATION CONTROLS
    ========================================================================== */
-.edu-main-card {
-    border-left: 4px solid #38bdf8;
-    background: rgba(56, 189, 248, 0.03);
-    padding: 16px 20px;
-    border-radius: 0 8px 8px 0;
-    margin-bottom: 20px;
-    text-align: left;
+.btn-primary {
+    background: var(--text-primary);
+    color: var(--bg-dark);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 14px 28px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.2s, background-color 0.2s;
 }
-.edu-card-header { display: flex; justify-content: space-between; align-items: center; }
-.edu-main-card h3 { margin: 0; font-size: 1.15rem; color: #ffffff; }
-.edu-date-badge { font-size: 0.8rem; background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 4px 8px; border-radius: 4px; font-weight: 700; }
-.university-name { margin: 6px 0 0 0; color: #94a3b8; font-size: 0.95rem; }
 
-.telemetry-table-wrapper { text-align: left; }
-.telemetry-table-wrapper h4 { margin: 0 0 12px 0; font-size: 0.8rem; color: #64748b; letter-spacing: 0.1em; }
-.sgpa-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
+.btn-primary:hover {
+    background-color: #ffffff;
+    transform: translateY(-1px);
 }
-.sgpa-node {
-    background: rgba(0,0,0,0.4);
-    border: 1px solid rgba(56, 189, 248, 0.1);
-    padding: 10px;
-    border-radius: 6px;
+
+.btn-arrow {
+    transition: transform 0.2s;
+}
+
+.btn-primary:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+.flow-navigation {
     display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 28px;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-primary);
+}
+
+/* Utilities */
+.code-font { font-family: var(--font-mono); font-size: 0.85rem; }
+.text-glow { color: #ffffff; text-shadow: 0 0 12px rgba(255, 255, 255, 0.15); }
+.animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
